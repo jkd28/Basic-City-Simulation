@@ -14,6 +14,10 @@ public class CitySim9005 {
             System.out.println("Invalid seed. Ensure the Seed is a 32-bit Integer");
             System.exit(1);
         }
-        System.out.println("Hello World.  You provided the right arguments.");
+
+        // Create intitial city map
+        // Create drivers
+        // Place drivers psuedorandomly (based on seed)
+        // Run simulation until a driver reaches an OC location
     }
 }
