@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class CitySim9005 {
     public static void main(String[] args){
         // Check format of arguments
@@ -5,8 +7,10 @@ public class CitySim9005 {
             System.out.println("USAGE: java CitySim9005 <integer seed> ");
             System.exit(1);
         }
-        // Parse integer from input
-        int seed;
+        // Intitialize the seed with unimportant value
+        int seed = 0;
+
+        // Get proper seed value from arguments
         try{
             seed = Integer.parseInt(args[0]);
         }
@@ -14,6 +18,10 @@ public class CitySim9005 {
             System.out.println("Invalid seed. Ensure the Seed is a 32-bit Integer");
             System.exit(1);
         }
+
+        // Create a psuedorandom generator with the provided seed
+        Random generator = new Random((long)seed);
+
 
         // Create intitial city map
         // Create drivers
