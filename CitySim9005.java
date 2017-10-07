@@ -19,12 +19,18 @@ public class CitySim9005 {
             System.exit(1);
         }
 
-        // Create a psuedorandom generator with the provided seed
         Random generator = new Random((long)seed);
 
+        City city = new City();
 
-        // Create intitial city map
-        // Create drivers
+        for (int i = 0; i < 5; i++){
+            // Generate first location and instantiate the driver
+            Location first = city.getDriverFirstLocation(generator);
+            System.out.println(first.toString());
+            Driver driver = new Driver(i+1);
+
+
+        }
         // Place drivers psuedorandomly (based on seed)
         // Run simulation until a driver reaches an OC location
     }
