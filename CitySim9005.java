@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 public class CitySim9005 {
     public static void main(String[] args){
@@ -11,7 +12,7 @@ public class CitySim9005 {
         int seed = 0;
 
         // Get proper seed value from arguments
-        try{
+        try {
             seed = Integer.parseInt(args[0]);
         }
         catch (NumberFormatException e){
@@ -25,13 +26,18 @@ public class CitySim9005 {
 
         for (int i = 0; i < 5; i++){
             // Generate first location and instantiate the driver
-            Location first = city.getDriverFirstLocation(generator);
-            System.out.println(first.toString());
-            Driver driver = new Driver(i+1);
+            Location firstLoc = city.getDriverFirstLocation(generator);
+            Driver driver = new Driver(i+1, firstLoc);
 
+            Location currentLocation = firstLoc;
+            while (!currentLocation.isOutOfCity()){
+                // Change Driver location
+                ArrayList<Location> possibleLocations = city.getPossibleLocations(currentLocation);
+
+                // Print message about route of travel
+                currentLocation = driver.getCurrentLocation();
+            }
 
         }
-        // Place drivers psuedorandomly (based on seed)
-        // Run simulation until a driver reaches an OC location
     }
 }
