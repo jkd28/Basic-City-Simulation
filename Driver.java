@@ -25,7 +25,7 @@ public class Driver{
     }
 
     // Modifiers
-    public void setCurrentLocation(Location newLoc){
+    public void nextLocation(Location newLoc){
         previousLocation = currentLocation;
         currentLocation = newLoc;
     }

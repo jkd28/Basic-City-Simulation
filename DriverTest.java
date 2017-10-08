@@ -19,7 +19,7 @@ public class DriverTest{
     public void testGetCurrentLocation(){
         Location testLoc = mock(Location.class);
         testLoc.setName("SuccessfulTest");
-        driver.setCurrentLocation(testLoc);
+        driver.nextLocation(testLoc);
 
         Location testResult = driver.getCurrentLocation();
         assertEquals(testResult, testLoc);
@@ -37,8 +37,8 @@ public class DriverTest{
         testLoc1.setName("SuccessfulTest");
         testLoc2.setName("ShouldntMatter");
 
-        driver.setCurrentLocation(testLoc1);
-        driver.setCurrentLocation(testLoc2);
+        driver.nextLocation(testLoc1);
+        driver.nextLocation(testLoc2);
 
         Location testResult = driver.getPreviousLocation();
         assertEquals(testResult, testLoc1);
@@ -55,8 +55,8 @@ public class DriverTest{
 
         testLoc2.setName("ShouldntMatter");
 
-        driver.setCurrentLocation(testLoc1);
-        driver.setCurrentLocation(testLoc2);
+        driver.nextLocation(testLoc1);
+        driver.nextLocation(testLoc2);
 
         Location testResult = driver.getPreviousLocation();
         assertEquals(testResult, null);

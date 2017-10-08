@@ -5,13 +5,12 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class City{
-    private final int NUM_LOCATIONS = 6;
-    private final String CLEVELAND = "Cleveland";
+    private final int NUM_LOCATIONS = 5;
     private final String LIBRARY = "Library";
     private final String COFFEE = "Coffee";
     private final String HOTEL = "Hotel";
     private final String DINER = "Diner";
-    private final String PHILLY = "Philadelphia";
+    private final String OUTSIDE = "Outside City";
     private final boolean IN_CITY = false;
     private final boolean OUT_OF_CITY = true;
 
@@ -25,7 +24,7 @@ public class City{
         Location loc = null;
         switch(num){
             case 0:
-                loc = new Location(CLEVELAND, OUT_OF_CITY);
+                loc = new Location(OUTSIDE, OUT_OF_CITY);
                 break;
             case 1:
                 loc = new Location(LIBRARY, IN_CITY);
@@ -39,9 +38,6 @@ public class City{
             case 4:
                 loc = new Location(DINER, IN_CITY);
                 break;
-            case 5:
-                loc = new Location(PHILLY, OUT_OF_CITY);
-                break;
         }
         return loc;
     }
@@ -50,7 +46,7 @@ public class City{
     public Location getDriverFirstLocation(Random generator){
         Location firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS));
         // Ensure a driver cannot start outside of the city
-        while (((firstLocation.getName()).equals(PHILLY)) || ((firstLocation.getName()).equals(CLEVELAND))){
+        while (firstLocation.getName().equals(OUTSIDE)) {
             firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS));
         }
 
@@ -65,7 +61,7 @@ public class City{
         String currentLocationName = currentLocation.getName();
 
         if (currentLocationName.equals(LIBRARY)) {
-            possibleLocations.add(new Location(CLEVELAND, OUT_OF_CITY));
+            possibleLocations.add(new Location(OUTSIDE, OUT_OF_CITY));
             possibleLocations.add(new Location(HOTEL,     IN_CITY));
 
         } else if (currentLocationName.equals(COFFEE)) {
@@ -77,7 +73,7 @@ public class City{
             possibleLocations.add(new Location(LIBRARY, IN_CITY));
 
         } else if (currentLocationName.equals(DINER)) {
-            possibleLocations.add(new Location(PHILLY, OUT_OF_CITY));
+            possibleLocations.add(new Location(OUTSIDE, OUT_OF_CITY));
             possibleLocations.add(new Location(COFFEE, IN_CITY));
 
         } else {
@@ -89,9 +85,9 @@ public class City{
         return possibleLocations;
     }
 
-    // Based on a Driver's previous location, determine the next location
-    // by random generation and possible locations
-    public Location getNextDriverLocation(Random generator, Driver driver){
-        return null;
+    // Determine the next location using random generation and a list of potential locations locations
+    public Location chooseNextLocation(Random generator, ArrayList<Location> possibleLocations){
+        int nextLocationIndex = generator.nextInt(possibleLocations.size());
+        return possibleLocations.get(nextLocationIndex);
     }
 }
