@@ -85,4 +85,39 @@ public class CityTest{
         assertEquals(testReturn.size(), 1);
         assertEquals(currentTest, currentTest);
     }
+
+    // Test that the function to determine the next locaiton properly returns a location
+    // when given a list of possible locations and a Random generator.
+    // TESTS: chooseNextLocation()
+    @Test
+    public void testNextLocation(){
+        Location test1 = new Location("Test Location",   false);
+        Location test2 = new Location("Won't be Picked", false);
+
+        ArrayList<Location> possibles = new ArrayList<Location>();
+        possibles.add(test1);
+        possibles.add(test2);
+
+        // Double the random generator
+        Random testGen = mock(Random.class);
+        when(testGen.nextInt(2)).thenReturn(0);
+
+        Location result = testCity.chooseNextLocation(testGen, possibles);
+        assertEquals(test1, result);
+    }
+
+    // Test that the function to determine the next locaiton returns null
+    // when given an empty list of possible locations and a Random generator.
+    // TESTS: chooseNextLocation()
+    @Test
+    public void testNextLocationEmptyArray(){
+        ArrayList<Location> possibles = new ArrayList<Location>();
+
+        // Double the random generator
+        Random testGen = mock(Random.class);
+        when(testGen.nextInt(0)).thenReturn(0);
+
+        Location result = testCity.chooseNextLocation(testGen, possibles);
+        assertNull(result);
+    }
 }

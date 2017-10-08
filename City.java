@@ -92,6 +92,10 @@ public class City{
 
     // Determine the next location using random generation and a list of potential locations locations
     public Location chooseNextLocation(Random generator, ArrayList<Location> possibleLocations){
+        // If an empty array is passed, return a null
+        if (possibleLocations.size() == 0) {
+            return null;
+        }
         int nextLocationIndex = generator.nextInt(possibleLocations.size());
         return possibleLocations.get(nextLocationIndex);
     }
