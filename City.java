@@ -21,33 +21,38 @@ public class City{
 
     // Convert the integer value to a location, and return it
     private Location intToLocation(int num){
-        Location loc = null;
+        Location loc;
         switch(num){
             case 0:
-                loc = new Location(OUTSIDE, OUT_OF_CITY);
-                break;
-            case 1:
                 loc = new Location(LIBRARY, IN_CITY);
                 break;
-            case 2:
+            case 1:
                 loc = new Location(COFFEE, IN_CITY);
                 break;
-            case 3:
+            case 2:
                 loc = new Location(HOTEL, IN_CITY);
                 break;
-            case 4:
+            case 3:
                 loc = new Location(DINER, IN_CITY);
                 break;
+            case 4:
+                loc = new Location(OUTSIDE, OUT_OF_CITY);
+                break;
+            // Should never receive a number that reaches this, but defensive programming and all
+            default:
+                loc = new Location(LIBRARY, IN_CITY);
         }
         return loc;
     }
 
     // Given a seeded random generator, determine the first location for the Driver
     public Location getDriverFirstLocation(Random generator){
-        Location firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS));
-        // Ensure a driver cannot start outside of the city
-        while (firstLocation.getName().equals(OUTSIDE)) {
-            firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS));
+        Location firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS-1));
+
+        // Ensure a driver cannot start outside of the city, and a driver cannot have a null start location
+        while ((firstLocation.getName().equals(OUTSIDE)) || (firstLocation == null)){
+            // To ensure there is no null values,
+            firstLocation = intToLocation(generator.nextInt(NUM_LOCATIONS-1));
         }
 
         return firstLocation;

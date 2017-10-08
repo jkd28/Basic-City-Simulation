@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class CityTest{
     City testCity;
+    final int NUM_LOCATIONS = 5;
 
     @Before
     public void setup(){
@@ -16,13 +17,26 @@ public class CityTest{
     // test the functionality of the function to get the initial Location of a Driver
     // TESTS: getDriverFirstLocation()
     @Test
-    public void testFirstLocationInitializeWithValidNum(){
+    public void testFirstLocationWithValidNum(){
         Random testGenerator = mock(Random.class);
         // Stub the nextInt method when called with 6 = Number of Possible locations
-        when(testGenerator.nextInt(5)).thenReturn(3);
+        when(testGenerator.nextInt(NUM_LOCATIONS-1)).thenReturn(3);
 
         Location testReturn = testCity.getDriverFirstLocation(testGenerator);
-        assertEquals("Hotel", testReturn.getName());
+        assertEquals("Diner", testReturn.getName());
+    }
+
+    // Using a DOUBLE of Random with a STUB of the nextInt() method yielding an invalid number
+    // for that method, test the that the initial location function will not return a null Location.
+    // TESTS: getDriverFirstLocation()
+    @Test
+    public void testFirstLocationWithInvalidNum(){
+        Random testGenerator = mock(Random.class);
+        // Stub the nextInt method when called with 6 = Number of Possible locations
+        when(testGenerator.nextInt(NUM_LOCATIONS-1)).thenReturn(1231);
+
+        Location testReturn = testCity.getDriverFirstLocation(testGenerator);
+        assertNotNull(testReturn);
     }
 
     // Test that the proper list of possible next locations is returned when
