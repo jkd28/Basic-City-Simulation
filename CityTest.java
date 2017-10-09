@@ -197,8 +197,9 @@ public class CityTest{
         assertEquals("Bill St.", testCity.determineRoadTravelled(libraryToHotel));
     }
 
-    // This test gives a variety of paths that could not exist.  The function should
+    // This test gives a couple of paths that could/should not exist.  The function should
     // return an empty string when the path is invalid.
+    // TESTS: determineRoadTravelled()
     @Test
     public void testRoadTravelledInvalidPath(){
         Location coffee = new Location("Coffee", false);
@@ -213,5 +214,46 @@ public class CityTest{
 
         assertEquals("", testCity.determineRoadTravelled(coffeeToOut));
         assertEquals("", testCity.determineRoadTravelled(hotelToCoffee));
+    }
+
+    // Test that the getDestination function properly works when provided the pair
+    // of paths that it is designed for (Library->Outside, Diner->Outside)
+    // TESTS: getDestination()
+    @Test
+    public void testGetDestination(){
+        Location library = new Location("Library", false);
+        Location diner = new Location("Diner", false);
+        Location out = new Location("Outside City", true);
+
+        Driver testCleveland = new Driver(0, library);
+        testCleveland.nextLocation(out);
+
+        Driver testPhilly = new Driver(1, diner);
+        testPhilly.nextLocation(out);
+
+        assertEquals("Cleveland", testCity.getDestination(testCleveland));
+        assertEquals("Philadelphia", testCity.getDestination(testPhilly));
+    }
+
+    // Test that the getDestination function properly works when provided a null driver
+    // TESTS: getDestination()
+    @Test
+    public void testGetDestinationNullDriver(){
+        Driver testNull = null;
+        assertEquals("", testCity.getDestination(testNull));
+    }
+
+    // Test that the getDestination function properly works when provided an improper
+    // location pair
+    // TESTS: getDestination()
+    @Test
+    public void testGetDestinationInvalidLocations(){
+        Location library = new Location("Library", false);
+        Location diner = new Location("Diner", false);
+
+        Driver testInvalid = new Driver(0, library);
+        testInvalid.nextLocation(diner);
+
+        assertEquals("", testCity.getDestination(testInvalid));
     }
 }
