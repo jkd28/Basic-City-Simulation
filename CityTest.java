@@ -107,7 +107,7 @@ public class CityTest{
     }
 
     // Test that the function to determine the next locaiton returns null
-    // when given an empty list of possible locations and a Random generator.
+    // when given an empty list of possible locations.
     // TESTS: chooseNextLocation()
     @Test
     public void testNextLocationEmptyArray(){
@@ -119,5 +119,81 @@ public class CityTest{
 
         Location result = testCity.chooseNextLocation(testGen, possibles);
         assertNull(result);
+    }
+
+    // Test that the fucntion determines the proper route of travel for a given
+    // final destination when the Driver is moving from the Hotel to that location
+    // TESTS: determineRoadTravelled()
+    @Test
+    public void testRoadTravelledFromHotel(){
+        Location hotel = new Location("Hotel", false);
+        Location diner = new Location("Diner", false);
+        Location library = new Location("Library", false);
+
+        Driver hotelToDiner = new Driver(0, hotel);
+        Driver hotelToLibrary = new Driver(1, hotel);
+
+        hotelToDiner.nextLocation(diner);
+        hotelToLibrary.nextLocation(library);
+
+        assertEquals("Fourth Ave.", testCity.determineRoadTravelled(hotelToDiner));
+        assertEquals("Bill St.", testCity.determineRoadTravelled(hotelToLibrary));
+    }
+
+    // Test that the fucntion determines the proper route of travel for a given
+    // final destination when the Driver is moving from the Diner to that location
+    // TESTS: determineRoadTravelled()
+    @Test
+    public void testRoadTravelledFromDiner(){
+        Location diner = new Location("Diner", false);
+        Location out = new Location("Out Of City", false);
+        Location coffee  = new Location("Coffee", false);
+
+        Driver dinerToOut = new Driver(0, diner);
+        Driver dinerToCoffee = new Driver(1, diner);
+
+        dinerToOut.nextLocation(out);
+        dinerToCoffee.nextLocation(coffee);
+
+        assertEquals("Fourth Ave.", testCity.determineRoadTravelled(dinerToOut));
+        assertEquals("Phil St.", testCity.determineRoadTravelled(dinerToCoffee));
+    }
+
+    // Test that the fucntion determines the proper route of travel for a given
+    // final destination when the Driver is moving from the Coffee to that location
+    // TESTS: determineRoadTravelled()
+    @Test
+    public void testRoadTravelledFromCoffee(){
+        Location coffee   = new Location("Coffee", false);
+        Location diner   = new Location("Diner", false);
+        Location library = new Location("Library", false);
+
+        Driver coffeeToDiner   = new Driver(0, coffee);
+        Driver coffeeToLibrary = new Driver(1, coffee);
+
+        coffeeToDiner.nextLocation(diner);
+        coffeeToLibrary.nextLocation(library);
+
+        assertEquals("Phil St.", testCity.determineRoadTravelled(coffeeToDiner));
+        assertEquals("Fifth Ave.", testCity.determineRoadTravelled(coffeeToLibrary));
+    }
+
+    // Test that the fucntion determines the proper route of travel for a given
+    // final destination when the Driver is moving from the Library to that location
+    // TESTS: determineRoadTravelled()
+    @Test
+    public void testRoadTravelledFromLibrary(){
+        Location library = new Location("Library", false);
+        Location out = new Location("Out Of City", false);
+        Location hotel = new Location("Hotel", false);
+
+        Driver libraryToOut = new Driver(0, library);
+        Driver libraryToHotel = new Driver(1, library);
+
+        libraryToOut.nextLocation(out);
+        libraryToHotel.nextLocation(hotel);
+
+        assertEquals("Fifth Ave.", testCity.determineRoadTravelled(libraryToOut));
+        assertEquals("Bill St.", testCity.determineRoadTravelled(libraryToHotel));
     }
 }
