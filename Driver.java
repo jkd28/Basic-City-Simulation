@@ -31,6 +31,11 @@ public class Driver{
     }
 
     // Accessors
+    // TODO ADD UNIT TEST
+    public int getID(){
+        return identifier;
+    }
+
     public Location getCurrentLocation(){
         return currentLocation;
     }
