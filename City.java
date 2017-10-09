@@ -113,31 +113,32 @@ public class City{
         if (prevLoc.equals(LIBRARY)){
             if (currLoc.equals(HOTEL)) {
                 return BILL;
-            } else { //currLoc = OUT_OF_CITY
+            } else if (currLoc.equals(OUTSIDE)) {
                 return FIFTH;
             }
 
         } else if (prevLoc.equals(COFFEE)) {
             if (currLoc.equals(LIBRARY)) {
                 return FIFTH;
-            } else { // currLoc = DINER
+            } else if (currLoc.equals(DINER)) {
                 return PHIL;
             }
 
         } else if (prevLoc.equals(DINER)) {
             if (currLoc.equals(COFFEE)) {
                 return PHIL;
-            } else  { // currLoc = OUT_OF_CITY
+            } else if (currLoc.equals(OUTSIDE)) {
                 return FOURTH;
             }
 
-        } else { // Location = HOTEL
+        } else if (prevLoc.equals(HOTEL)) {
             if (currLoc.equals(DINER)) {
                 return FOURTH;
-            } else  { // currLoc = LIBRARY
+            } else if (currLoc.equals(LIBRARY)) {
                 return BILL;
             }
         }
-
+        // If we reach here, there's not a valid path
+        return "";
     }
 }

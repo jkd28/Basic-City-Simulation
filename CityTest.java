@@ -146,7 +146,7 @@ public class CityTest{
     @Test
     public void testRoadTravelledFromDiner(){
         Location diner = new Location("Diner", false);
-        Location out = new Location("Out Of City", false);
+        Location out = new Location("Outside City", true);
         Location coffee  = new Location("Coffee", false);
 
         Driver dinerToOut = new Driver(0, diner);
@@ -184,7 +184,7 @@ public class CityTest{
     @Test
     public void testRoadTravelledFromLibrary(){
         Location library = new Location("Library", false);
-        Location out = new Location("Out Of City", false);
+        Location out = new Location("Outside City", true);
         Location hotel = new Location("Hotel", false);
 
         Driver libraryToOut = new Driver(0, library);
@@ -195,5 +195,23 @@ public class CityTest{
 
         assertEquals("Fifth Ave.", testCity.determineRoadTravelled(libraryToOut));
         assertEquals("Bill St.", testCity.determineRoadTravelled(libraryToHotel));
+    }
+
+    // This test gives a variety of paths that could not exist.  The function should
+    // return an empty string when the path is invalid.
+    @Test
+    public void testRoadTravelledInvalidPath(){
+        Location coffee = new Location("Coffee", false);
+        Location out = new Location("Outside City", false);
+        Location hotel = new Location("Hotel", false);
+
+        Driver coffeeToOut = new Driver(0, coffee);
+        Driver hotelToCoffee = new Driver(1, hotel);
+
+        coffeeToOut.nextLocation(out);
+        hotelToCoffee.nextLocation(coffee);
+
+        assertEquals("", testCity.determineRoadTravelled(coffeeToOut));
+        assertEquals("", testCity.determineRoadTravelled(hotelToCoffee));
     }
 }
