@@ -11,6 +11,10 @@ public class City{
     private final String HOTEL = "Hotel";
     private final String DINER = "Diner";
     private final String OUTSIDE = "Outside City";
+    private final String PHIL = "Phil St.";
+    private final String BILL = "Bill St.";
+    private final String FOURTH = "Fourth Ave.";
+    private final String FIFTH = "Fifth Ave.";
     private final boolean IN_CITY = false;
     private final boolean OUT_OF_CITY = true;
 
@@ -98,5 +102,42 @@ public class City{
         }
         int nextLocationIndex = generator.nextInt(possibleLocations.size());
         return possibleLocations.get(nextLocationIndex);
+    }
+
+    // Determine the road used by a Driver when moving from the previous Location
+    // to the current Location
+    public String determineRoadTravelled(Driver driver){
+        String prevLoc = driver.getPreviousLocation().getName();
+        String currLoc = driver.getCurrentLocation().getName();
+
+        if (prevLoc.equals(LIBRARY)){
+            if (currLoc.equals(HOTEL)) {
+                return BILL;
+            } else { //currLoc = OUT_OF_CITY
+                return FIFTH;
+            }
+
+        } else if (prevLoc.equals(COFFEE)) {
+            if (currLoc.equals(LIBRARY)) {
+                return FIFTH;
+            } else { // currLoc = DINER
+                return PHIL;
+            }
+
+        } else if (prevLoc.equals(DINER)) {
+            if (currLoc.equals(COFFEE)) {
+                return PHIL;
+            } else  { // currLoc = OUT_OF_CITY
+                return FOURTH;
+            }
+
+        } else { // Location = HOTEL
+            if (currLoc.equals(DINER)) {
+                return FOURTH;
+            } else  { // currLoc = LIBRARY
+                return BILL;
+            }
+        }
+
     }
 }
