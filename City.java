@@ -141,4 +141,28 @@ public class City{
         // If we reach here, there's not a valid path
         return "";
     }
+
+    // Determine the final location (Philadelphia/Cleveland)for a diver
+    // based on the previous location.  Returns an empty string if the driver
+    // has not left the city, or if the previous location is not reachable from Outside City,
+    // or if the driver supplied is null
+    public String getDestination(Driver driver) {
+        if (driver == null) {
+            return "";
+        }
+
+        if (driver.getCurrentLocation().getName().equals(OUTSIDE)) {
+            String prevLoc = driver.getPreviousLocation().getName();
+
+            if (prevLoc.equals(LIBRARY)){
+                return "Cleveland";
+            } else if (prevLoc.equals(DINER)) {
+                return "Philadelphia";
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
 }

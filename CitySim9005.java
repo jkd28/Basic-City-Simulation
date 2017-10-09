@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class CitySim9005 {
 
-    //TODO ADD UNIT TESTS   
+    //TODO ADD UNIT TESTS
     public static String buildRouteDescription(City city, Driver driver) {
         String route = "Driver " + driver.getID() + " heading from " + driver.getPreviousLocation().toString() +
                         " to " + driver.getCurrentLocation().toString() + " via ";
@@ -51,7 +51,7 @@ public class CitySim9005 {
                 String routeDescription = buildRouteDescription(city, driver);
                 System.out.println(routeDescription);
             }
-            // TODO ADD PRINTOUT OF FINAL DESTINATION
+            System.out.println(city.getDestination(driver));
             System.out.println("---------------------");
         }
     }
