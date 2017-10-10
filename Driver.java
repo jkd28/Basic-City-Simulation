@@ -12,12 +12,6 @@ public class Driver{
         identifier = -1;
     }
 
-    public Driver(int id){
-        identifier = id;
-        currentLocation = null;
-        previousLocation = null;
-    }
-
     public Driver(int id, Location loc){
         identifier = id;
         currentLocation = loc;
@@ -31,7 +25,6 @@ public class Driver{
     }
 
     // Accessors
-    // TODO ADD UNIT TEST
     public int getID(){
         return identifier;
     }

@@ -61,4 +61,19 @@ public class DriverTest{
         Location testResult = driver.getPreviousLocation();
         assertEquals(testResult, null);
     }
+
+    // Test that the Driver will return the correct ID after Intitialization with that ID
+    // TESTS: getID()
+    @Test
+    public void testGetID(){
+        driver = new Driver(123, new Location("Test Location", false));
+        assertEquals(123, driver.getID());
+    }
+
+    // Test that the Driver will return an ID of -1 when the ID is not initialized
+    // TESTS getID()
+    @Test
+    public void testGetUninitializedID(){
+        assertEquals(-1, driver.getID());
+    }
 }
