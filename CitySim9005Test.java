@@ -20,8 +20,8 @@ public class CitySim9005Test{
         Driver driver = mock(Driver.class);
 
         when(driver.getID()).thenReturn(123);
-        when(driver.getPreviousLocation().toString()).thenReturn("Test");
-        when(driver.getCurrentLocation().toString()).thenReturn("Successful");
+        when(driver.getPreviousLocation()).thenReturn(new Location("Test", false));
+        when(driver.getCurrentLocation()).thenReturn(new Location("Successful", false));
 
         when(city.determineRoadTravelled(driver)).thenReturn("ThisTotallyWorks");
 

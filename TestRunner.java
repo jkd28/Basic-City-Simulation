@@ -14,6 +14,7 @@ public class TestRunner {
     classesToTest.add(DriverTest.class);
     classesToTest.add(CityTest.class);
     classesToTest.add(LocationTest.class);
+    classesToTest.add(CitySim9005Test.class);
 
 	// For all test classes added, loop through and use JUnit
 	// to run them.
