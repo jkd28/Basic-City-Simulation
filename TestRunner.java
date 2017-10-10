@@ -10,7 +10,6 @@ public class TestRunner {
 	boolean anyFailures = false;
 
 	// ADD ANY CLASSES YOU WISH TO TEST HERE
-	//classesToTest.add(CitySim9005Test.class);
     classesToTest.add(DriverTest.class);
     classesToTest.add(CityTest.class);
     classesToTest.add(LocationTest.class);
