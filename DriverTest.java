@@ -25,6 +25,15 @@ public class DriverTest{
         assertEquals(testResult, testLoc);
     }
 
+    // Test that the accessor for the driver's current location returns
+    // null immediately after instantiation
+    // TESTS: getCurrentLocation()
+    @Test
+    public void testGetNullCurrentLocation(){
+        Location testResult = driver.getCurrentLocation();
+        assertNull(testResult);
+    }
+
     // Test the accessor for driver's location
     //   First set the location to a DOUBLE of the Location class, then do it for a second location.
     //   Then check to ensure that the previous location has properly updated.
